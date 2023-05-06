@@ -1,1 +1,4 @@
-Ram ram ji
+Ram ram ji ---!
+
+1.[] Define Intial Model For App :
+User , Chat , Message Models 
