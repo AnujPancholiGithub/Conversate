@@ -7,21 +7,19 @@ const registerUser = asyncHandeler(async (req, res) => {
   const { name, email, password, image } = req.body;
 
   if (!name || !email || !password) {
-    return res
-      .status(400)
-      .send(
-        "We kindly request that you provide us with all the required details"
-      );
+    return res.status(401).json({
+      serverMessage:
+        "We kindly request that you provide us with all the required details",
+    });
   }
 
   const userExist = await User.findOne({ email });
 
   if (userExist) {
-    return res
-      .status(400)
-      .send(
-        "Oops! déjà vu? Looks like you've already got an account - log in and let's get going!"
-      );
+    return res.status(409).json({
+      serverMessage:
+        "Oops! déjà vu? Looks like you've already got an account - log in and let's get going!",
+    });
   }
 
   const user = await User.create({ name, email, password, image });
@@ -39,9 +37,10 @@ const registerUser = asyncHandeler(async (req, res) => {
       token: generateJwtToken(payload),
     });
   } else {
-    res
-      .status(400)
-      .send("Uh oh, looks like something went wrong with account creation");
+    res.status(401).json({
+      serverMessage:
+        "Uh oh, looks like something went wrong with account creation",
+    });
   }
 });
 
@@ -49,7 +48,7 @@ const logIN = asyncHandeler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     console.log("Invalid Filed data");
-    return res.status(400).send("Invalid user data");
+    return res.status(401).send("Invalid user data");
   }
 
   const userExist = await User.findOne({ email });
@@ -72,7 +71,7 @@ const logIN = asyncHandeler(async (req, res) => {
     });
   } else {
     res
-      .status(400)
+      .status(401)
       .send(
         "Oops! Looks like there's an issue with your login details. Let's give it another shot"
       );

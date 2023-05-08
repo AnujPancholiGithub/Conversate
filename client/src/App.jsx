@@ -1,18 +1,16 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import './App.css'
-import { Heading } from '@chakra-ui/react'
+import "./App.css";
+import { Heading } from "@chakra-ui/react";
+import AuthPage from "./pages/AuthPage";
+import Allroutes from "./routes/Allroutes";
 
 function App() {
-
-
   return (
     <>
-<Heading>
-  Ram ram ji
-</Heading>
+      <Allroutes />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
