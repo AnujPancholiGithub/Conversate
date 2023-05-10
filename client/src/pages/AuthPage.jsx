@@ -55,13 +55,6 @@ const AuthPage = () => {
           </TabPanels>
         </Tabs>
       </Box>
-      <Button
-        onClick={() => {
-          setTabIndex(0);
-        }}
-      >
-        Chnage
-      </Button>
     </Container>
   );
 };
