@@ -79,7 +79,7 @@ const SideDrawar = () => {
       if (!chats.find((c) => c._id == result.data._id)) {
         setChats([data, ...chats]);
       }
-      setSelectedChat(result.data);
+      setSelectedChat(data);
 
       onClose();
     } catch (error) {
@@ -131,7 +131,12 @@ const SideDrawar = () => {
                 <LoadingList />
               ) : (
                 searchResult?.map((user) => {
-                  return <UserList user={user} handelChats={handelChats} />;
+                  return (
+                    <UserList
+                      user={user}
+                      handleFunction={() => handelChats(user._id)}
+                    />
+                  );
                 })
               )}
             </Box>

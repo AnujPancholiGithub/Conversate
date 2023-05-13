@@ -22,7 +22,7 @@ import UserBadgeItem from "../User/UserBadgeItem";
 
 const GroupChatModal = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [groupChatName, setGroupChatName] = useState();
+  const [groupChatName, setGroupChatName] = useState("");
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -162,6 +162,7 @@ const GroupChatModal = ({ children }) => {
               <Input
                 placeholder="chat name"
                 mb={3}
+                value={groupChatName}
                 onChange={(e) => {
                   return setGroupChatName(e.target.value);
                 }}
@@ -171,6 +172,7 @@ const GroupChatModal = ({ children }) => {
               <Input
                 placeholder="Add users eg: Anuj, Pawan ,Dipu"
                 mb={3}
+                value={search}
                 onChange={(e) => {
                   return setSearch(e.target.value);
                 }}
@@ -182,7 +184,7 @@ const GroupChatModal = ({ children }) => {
                   <UserBadgeItem
                     key={user._id}
                     user={user}
-                    handelDelete={() => handelDelete(user)}
+                    handleFunction={() => handelDelete(user)}
                   />
                 );
               })}
@@ -196,7 +198,7 @@ const GroupChatModal = ({ children }) => {
                   <UserList
                     key={user._id}
                     user={user}
-                    handelGroup={() => handelGroup(user)}
+                    handleFunction={() => handelGroup(user)}
                   />
                 );
               })

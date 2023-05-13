@@ -4,15 +4,15 @@ import { useNavigate } from "react-router-dom";
 const ChatContext = createContext();
 
 const ChatProvider = ({ children }) => {
-  const [selectedChat, setSelectedChat] = useState();
+  const [selectedChat, setSelectedChat] = useState("");
   const [user, setUser] = useState({
     pic: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
     _id: "2",
     name: "John Doe",
   });
   const [notification, setNotification] = useState([]);
-  const [chats, setChats] = useState();
-  const [token, setToken] = useState();
+  const [chats, setChats] = useState("");
+  const [token, setToken] = useState("");
   const [fetchAgain, setFetchAgain] = useState(false);
 
   const navigateTo = useNavigate();

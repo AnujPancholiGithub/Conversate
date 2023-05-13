@@ -31,7 +31,13 @@ const ProfileModal = ({ user, childern }) => {
           <ModalHeader>{user.name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Image src="https://th.bing.com/th/id/OIP.UxSJWsPP7oKuoUAwqvJQnAHaG-?pid=ImgDet&rs=11"></Image>
+            <Image
+              src={
+                user.profile
+                  ? user.profile
+                  : "https://th.bing.com/th/id/OIP.UxSJWsPP7oKuoUAwqvJQnAHaG-?pid=ImgDet&rs=11"
+              }
+            ></Image>
           </ModalBody>
 
           <ModalFooter display={"flex"} justifyContent={"space-around"}>

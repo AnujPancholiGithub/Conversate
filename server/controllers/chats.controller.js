@@ -110,7 +110,7 @@ const renameGroup = expressAsyncHandler(async (req, res) => {
   const { groupID, newName } = req.body;
 
   if (!groupID || !newName) {
-    return res.status(401).send("Please Provide All details");
+    return res.status(400).send("Please Provide All details");
   }
 
   try {
@@ -135,12 +135,18 @@ const addToGroup = expressAsyncHandler(async (req, res) => {
   }
 
   try {
-    const groupUpdated = await Chat.findByIdAndUpdate(groupID, {
-      $push: { users: newUserID },
-    })
+    const groupUpdated = await Chat.findByIdAndUpdate(
+      groupID,
+      {
+        $push: { users: newUserID },
+      },
+      {
+        new: true,
+      }
+    )
       .populate("users", "-password")
       .populate("groupAdmin", "-password");
-
+    console.log("updated data: ", groupUpdated, "with this user : ", newUserID);
     return res.status(200).send(groupUpdated);
   } catch (error) {
     return res
@@ -157,9 +163,15 @@ const removeFromGroup = expressAsyncHandler(async (req, res) => {
   }
 
   try {
-    const groupUpdated = await Chat.findByIdAndUpdate(groupID, {
-      $pull: { users: newUserID },
-    })
+    const groupUpdated = await Chat.findByIdAndUpdate(
+      groupID,
+      {
+        $pull: { users: newUserID },
+      },
+      {
+        new: true,
+      }
+    )
       .populate("users", "-password")
       .populate("groupAdmin", "-password");
     return res.status(200).send(groupUpdated);

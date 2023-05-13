@@ -56,9 +56,10 @@ const MyChat = () => {
     if (token) {
       fetchChats();
     }
+    console.log("Mai run ho raha hu fetch chats");
 
     // eslint-disable-next-line
-  }, [token]);
+  }, [token, selectedChat]);
 
   return (
     <Box

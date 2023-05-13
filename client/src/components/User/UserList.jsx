@@ -10,16 +10,12 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const UserList = ({ user, handelChats, handelGroup }) => {
+const UserList = ({ user, handleFunction }) => {
   console.log("user in list ", user);
   return (
     <>
-      <VStack>
-        <Card
-          onClick={() => {
-            handelGroup ? handelGroup() : handelChats(user._id);
-          }}
-        >
+      <VStack onClick={handleFunction}>
+        <Card>
           <CardBody
             display={"flex"}
             direction={"row"}

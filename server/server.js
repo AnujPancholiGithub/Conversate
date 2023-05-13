@@ -7,6 +7,7 @@ const mongoConnect = require("./config/db");
 const authRouter = require("./routes/auth.routes");
 const userRouter = require("./routes/users.routes");
 const chatRoutes = require("./routes/chats.routes");
+const messageRoutes = require("./routes/message.routes");
 const errorHandeler = require("./middlewares/requestErrorHandeler.MW");
 //Connecting MongoDB
 mongoConnect();
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/chats", chatRoutes);
+app.use("/api/messages", messageRoutes);
 // app.use("/:random", errorHandeler);
 const port = process.env.PORT || 5000;
 

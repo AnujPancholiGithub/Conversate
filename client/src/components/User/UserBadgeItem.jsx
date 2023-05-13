@@ -2,8 +2,7 @@ import { Avatar, Badge, Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 
-const UserBadgeItem = ({ user, handelDelete }) => {
-  console.log("profile", user);
+const UserBadgeItem = ({ user, handleFunction }) => {
   return (
     <>
       <Flex gap={1} width={"50%"}>
@@ -24,7 +23,7 @@ const UserBadgeItem = ({ user, handelDelete }) => {
               size={"sm"}
               ml="1"
               colorScheme="red"
-              onClick={() => handelDelete()}
+              onClick={() => handleFunction()}
             >
               X
             </Badge>
