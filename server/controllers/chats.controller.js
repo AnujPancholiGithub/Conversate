@@ -6,7 +6,7 @@ const accessChat = expressAsyncHandler(async (req, res) => {
   const { userID } = req.body;
 
   if (!userID) {
-    return res.status(400).json({
+    return res.status(401).json({
       success: false,
       message: "Please provide a userId parameter",
       data: null,

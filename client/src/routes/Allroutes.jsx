@@ -4,11 +4,13 @@ import AuthPage from "../pages/AuthPage";
 import HomePage from "../pages/HomePage";
 import Header from "../components/Partials/Header";
 import ChatPage from "../pages/ChatPage";
+import { ChatState } from "../context/context";
 
 const Allroutes = () => {
+  const { user } = ChatState();
   return (
     <>
-      <Header />
+      {user ? <Header /> : <> </>}
       <Routes>
         <Route path="/Auth" element={<AuthPage />} />
         <Route path="/" element={<HomePage />} />
