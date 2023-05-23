@@ -5,28 +5,30 @@ const ChatContext = createContext();
 
 const ChatProvider = ({ children }) => {
   const [selectedChat, setSelectedChat] = useState("");
-  const [user, setUser] = useState({
-    pic: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
-    _id: "2",
-    name: "John Doe",
-  });
+  const [user, setUser] = useState(() =>
+    JSON.parse(localStorage.getItem("user"))
+  );
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState("");
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(() =>
+    JSON.parse(localStorage.getItem("token"))
+  );
   const [fetchAgain, setFetchAgain] = useState(false);
 
   const navigateTo = useNavigate();
 
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("user"));
-    const token = JSON.parse(localStorage.getItem("token"));
-    setUser(userInfo);
-    setToken(token);
-    if (!userInfo || userInfo == null) {
+    // Set initial user and token from local storage
+    setToken(() => JSON.parse(localStorage.getItem("token")));
+    setUser(() => JSON.parse(localStorage.getItem("user")));
+  }, []);
+
+  useEffect(() => {
+    // Redirect to auth page if user is not logged in
+    if (!user) {
       navigateTo("/auth");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigateTo]);
+  }, [navigateTo, user]);
 
   return (
     <ChatContext.Provider
@@ -40,8 +42,8 @@ const ChatProvider = ({ children }) => {
         chats,
         setChats,
         token,
-        setFetchAgain,
         fetchAgain,
+        setFetchAgain,
       }}
     >
       {children}

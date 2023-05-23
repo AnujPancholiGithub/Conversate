@@ -4,12 +4,13 @@ const Chat = require("../models/chat.model");
 const User = require("../models/user.model");
 
 //@description     Get all Messages
-//@route           GET /api/Message/:chatId
+//@route           GET /api/Message/:chatID
 //@access          Protected
 const allMessages = asyncHandler(async (req, res) => {
+  console.log("chatID: ", req.params.chatID);
   try {
-    const messages = await Message.find({ chat: req.params.chatId })
-      .populate("sender", "name pic email")
+    const messages = await Message.find({ chat: req.params.chatID })
+      .populate("sender", "name profile email")
       .populate("chat");
     res.json(messages);
   } catch (error) {
@@ -22,9 +23,9 @@ const allMessages = asyncHandler(async (req, res) => {
 //@route           POST /api/Message/
 //@access          Protected
 const sendMessage = asyncHandler(async (req, res) => {
-  const { content, chatId } = req.body;
+  const { content, chatID } = req.body;
 
-  if (!content || !chatId) {
+  if (!content || !chatID) {
     console.log("Invalid data passed into request");
     return res.sendStatus(400);
   }
@@ -32,20 +33,20 @@ const sendMessage = asyncHandler(async (req, res) => {
   var newMessage = {
     sender: req.user._id,
     content: content,
-    chat: chatId,
+    chat: chatID,
   };
 
   try {
     var message = await Message.create(newMessage);
 
-    message = await message.populate("sender", "name pic").execPopulate();
-    message = await message.populate("chat").execPopulate();
+    message = await message.populate("sender", "name pic");
+    message = await message.populate("chat");
     message = await User.populate(message, {
       path: "chat.users",
       select: "name pic email",
     });
 
-    await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
+    await Chat.findByIdAndUpdate(req.body.chatID, { latestMessage: message });
 
     res.json(message);
   } catch (error) {

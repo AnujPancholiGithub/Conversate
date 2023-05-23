@@ -7,7 +7,7 @@ const {
 
 const router = express.Router();
 
-router.route("/:chatId").get(protectAuth, allMessages);
+router.route("/:chatID").get(protectAuth, allMessages);
 router.route("/").post(protectAuth, sendMessage);
 
 module.exports = router;

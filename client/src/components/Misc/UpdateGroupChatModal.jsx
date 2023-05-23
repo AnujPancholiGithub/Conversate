@@ -67,10 +67,7 @@ const UpdateGroupChatModal = ({ fetchMessages }) => {
       if (result.status === 200) {
         setLoading(false);
       }
-
-      console.log("result", result.data);
     } catch (error) {
-      console.log("error", error);
       toast({
         title: "Error Occured!",
         description: "Failed to Load the Search Results",
@@ -82,7 +79,6 @@ const UpdateGroupChatModal = ({ fetchMessages }) => {
     }
   };
   const handleAddUser = async (userToAdd) => {
-    console.log("selectedChat In AddUset: ", selectedChat);
     if (selectedChat.users.find((u) => u._id === userToAdd._id)) {
       toast({
         title: "User Already in group!",
@@ -126,10 +122,7 @@ const UpdateGroupChatModal = ({ fetchMessages }) => {
       } else {
         return;
       }
-
-      console.log(" add to user result ", result.data);
     } catch (error) {
-      console.log("error: ", error);
       toast({
         title: "Error Occured!",
         description: "Failed to Load the Search Results",
@@ -142,8 +135,6 @@ const UpdateGroupChatModal = ({ fetchMessages }) => {
   };
 
   const handleRemove = async (userToReomve, admin) => {
-    console.log("selectedChat In RemoveUser: ", selectedChat);
-
     if (selectedChat.groupAdmin._id === userToReomve._id && !admin) {
       toast({
         title: "Oops! You can't remove yourself",
@@ -196,9 +187,8 @@ const UpdateGroupChatModal = ({ fetchMessages }) => {
       } else {
         return;
       }
-      console.log(" Remove to user result ", result.data);
+      fetchMessages();
     } catch (error) {
-      console.log("error: ", error);
       toast({
         title: "Error Occured!",
         description: "Failed to Remove User",
@@ -230,10 +220,6 @@ const UpdateGroupChatModal = ({ fetchMessages }) => {
         config
       );
 
-      console.log(
-        `🚀 ~> file: UpdateGroupChatModal.jsx:68 ~> handelRename ~> l̥:`,
-        data
-      );
       setSelectedChat(data);
     } catch (error) {
       console.log(error);

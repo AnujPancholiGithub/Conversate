@@ -27,7 +27,7 @@ const registerUser = asyncHandeler(async (req, res) => {
   const payload = {
     name: user.name,
     email: user.email,
-    image: user.image,
+    profile: user.image,
     _id: user.id,
   };
 
@@ -61,7 +61,7 @@ const logIN = asyncHandeler(async (req, res) => {
     const payload = {
       name: userExist.name,
       email: userExist.email,
-      image: userExist.image,
+      profile: userExist.image,
       _id: userExist.id,
     };
     return res.status(200).json({

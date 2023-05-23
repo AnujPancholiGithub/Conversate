@@ -11,7 +11,6 @@ import {
 import React from "react";
 
 const UserList = ({ user, handleFunction }) => {
-  console.log("user in list ", user);
   return (
     <>
       <VStack onClick={handleFunction}>

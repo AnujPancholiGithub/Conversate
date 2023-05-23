@@ -12,7 +12,6 @@ const MyChat = () => {
   const {
     fetchAgain,
     setFetchAgain,
-    setFetc,
     token,
     selectedChat,
     setSelectedChat,
@@ -24,7 +23,6 @@ const MyChat = () => {
   const toast = useToast();
 
   const fetchChats = async () => {
-    // console.log(user._id);
     try {
       const config = {
         headers: {
@@ -36,9 +34,8 @@ const MyChat = () => {
         "http://127.0.0.1:3007/api/chats",
         config
       );
-      console.log("chat data: ", data);
+
       setChats(data);
-      console.log("chat data: ", data);
     } catch (error) {
       toast({
         title: "Error Occured!",
@@ -56,7 +53,6 @@ const MyChat = () => {
     if (token) {
       fetchChats();
     }
-    console.log("Mai run ho raha hu fetch chats");
 
     // eslint-disable-next-line
   }, [token, selectedChat]);

@@ -25,7 +25,7 @@ const accessChat = expressAsyncHandler(async (req, res) => {
 
   isChat = await User.populate(isChat, {
     path: "latestMessage.sender",
-    select: "name pic email",
+    select: "name profile email",
   });
 
   if (isChat.length > 0) {
