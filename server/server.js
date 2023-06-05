@@ -29,10 +29,10 @@ app.use("/api/users", userRouter);
 app.use("/api/chats", chatRoutes);
 app.use("/api/messages", messageRoutes);
 // app.use("/:random", errorHandeler);
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-const server = app.listen(port, () => {
-  console.log("Server Started on port: ", port);
+const server = app.listen(PORT, () => {
+  console.log("Server Started on PORT: ", PORT);
 });
 
 const io = require("socket.io")(server, {
